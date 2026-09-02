@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude 日次レビュー 2026-07-13</title>
+<style>
+body{margin:0;background:#0b1020;color:#e7eaf2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1100px;margin:auto;padding:28px 18px 60px}h1{margin-bottom:4px}.sub,.meta,.tag{color:#9aa5bd}
+.card,.empty,.notice{background:#12182a;border:1px solid #29324a;border-radius:14px;padding:20px;margin-top:18px}
+.pnl{font-size:28px;font-weight:750;margin:8px 0}.pos{color:#50e3a4}.neg{color:#ff6b8a}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}table{width:100%;border-collapse:collapse}
+th,td{padding:7px;border-bottom:1px solid #273047;text-align:right}th{text-align:left;color:#aab4ca}
+p{line-height:1.75}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+
+h3 span.pos{color:#50e3a4}h3 span.neg{color:#ff6b8a}
+</style></head><body><main>
+<h1>Claude 日次レビュー</h1><div class="sub">2026-07-13</div>
+
+<article class="card">
+  <div class="tag">全体レビュー ・ レジーム×タイプ強弱</div>
+  <h2>全体レビュー</h2>
+  <p>直近5営業日の日経は-2,670円、ATM IVは-10.2ptで、レジームは「下落・IV低下」。SQまで32日です。当日の実質決済損益は単体1件で+660,000円。タイプ別の首位はカレンダー/ダイアゴナル型（累計+3,461,000円、27決済18勝）。最下位はヘッジ型（累計-702,000円）。連敗中（2連敗以上）は9戦略（5. ATMバックスプレッド、9. OTM±3000リバース・アイアンコンドル、19. ATMミニ5ロングストラドル (0.5枚相当) 等）。個別レビューの改善方向を参照してください。なお、28/28戦略が20決済未満で勝率・傾向は参考値、各戦略は同一レジームへの相関の高い重複ベットであり独立した検証ではない、損益は清算値ベースのグロスで手数料・スリッページ・約定可能性を含まない点に留意してください。</p>
+  <div class="grid"><table><tr><th>2026-07-06</th><td>69,885</td></tr><tr><th>2026-07-07</th><td>68,300</td></tr><tr><th>2026-07-08</th><td>66,690</td></tr><tr><th>2026-07-09</th><td>67,670</td></tr><tr><th>2026-07-10</th><td>68,805</td></tr><tr><th>2026-07-13</th><td>67,215</td></tr></table>
+  <table><tr><th>実質決済損益（単体1件）</th><td>+660,000円</td></tr>
+  <tr><th>コンボ決済損益（0件）</th><td>+0円</td></tr>
+  <tr><th>ATM IV</th><td>31.0</td></tr></table></div>
+</article>
+<article class="card">
+  <h2>個別戦略レビュー</h2>
+  <h3>1. トリガードATMバックスプレッド PUT (売1:買3)（スプレッド系ボラ拡大型）<span class='pos'> +660,000円</span></h3><p>本日利確で+660,000円を確定。この決済の要因分解では、価格変動 +870,345円が最大の追い風です。時間経過 -237,934円の逆風を上回って利益を残しました。累計では+2,190,000円の利益（2回中2勝、直近5件 ○○、傾向はデータ不足、PF 損失なし、最大DD -0円）。決済2回は判断に足るサンプル（20回以上）未満のため、勝率・傾向は参考値です。このタイプは大きな価格変動またはIV上昇が必要です。直近5営業日は下落・IV低下（日経-2,670円）で、現在の地合いは逆風です。改善方向: 現行ルールが機能しており変更不要です。</p>
+  <p class="meta">当日決済1件ごとの詳細な数値分解はCodex版レポートを参照。</p>
+</article>
+<article class="card">
+  <h2>既存戦略の改善提案</h2>
+  <h3>5. ATMバックスプレッド</h3><p>SL を-200000から-400000に拡大。last5_marks が××××× で 5連敗中だが、verdict が「stopの大半がしきい値2倍以内」と明示。ギャップ損を許容幅に吸収させることで損失軽減を期待。</p><p class='meta'>根拠: last5_marks ××××× で 5連敗、losing_streak 5。verdict「しきい値2倍以内で改善余地」と診断済み。</p><h3>12. ATM ロングストラドル</h3><p>ギャップ損対策として SQ 前 5 営業日での自動ロール実装、または限月を先月に切り替え。last5_marks が××○×× で悪化中、verdict「ギャップ損が中心で構造問題」と診断。</p><p class='meta'>根拠: closed_count 18・wins 9 で基礎堅牢だが last5_marks が××○×× で悪化傾向、losing_streak 2。verdict が「しきい値では救えない構造問題」と指摘。</p><h3>21. OTM±1000 ストラングル</h3><p>OTM 度合いを深くしストライク幅を±1500 に拡大、またはエッジ側での自動ロール追加。last5_marks が××○×× で悪化中、verdict「ギャップ損が中心」と診断。</p><p class='meta'>根拠: last5_marks が××○×× で悪化傾向、losing_streak 2。verdict「しきい値では救えない構造問題」は既存幅では対応不可を示唆。</p>
+</article>
+<article class="card">
+  <h2>新戦略の提案</h2>
+  <h3>ロング・プットバタフライ（下方防御付きθ）（ATM/OTMディケイ型）</h3><p>構成: 期近: ATM-1000 PUT買い1枚＋ATM-2000 PUT売り2枚＋ATM-3000 PUT買い1枚</p><p>ドライバー: 緩い下落での着地点狙い。コスト限定</p><p class='meta'>主リスク: 想定より深い下落・急反発では建玉コストを失うだけ</p><h3>コール・バックスプレッド（クレジット建て）（スプレッド系ボラ拡大型）</h3><p>構成: 期近ATM+500 CALL売り1枚＋ATM+1500 CALL買い3枚（受取で建てる）</p><p>ドライバー: 急騰時のガンマ。受取建てなら小動きでも損失小</p><p class='meta'>主リスク: 緩い上昇で買い脚が伸びず売り脚だけ痛む「中途半端な上げ」</p>
+  <p class="meta">提案はシミュレーターのトラック候補であり、実口座での売買推奨ではありません。</p>
+</article>
+</main></body></html>

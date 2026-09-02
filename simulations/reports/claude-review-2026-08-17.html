@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>詳細レビュー 2026-08-17</title>
+<style>
+body{margin:0;background:#0b1020;color:#e7eaf2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{margin:auto;max-width:1160px;padding:28px 18px 60px}h1{margin-bottom:4px}.sub,.meta,.tag{color:#9aa5bd}
+.card,.empty,.notice{background:#12182a;border:1px solid #29324a;border-radius:8px;padding:20px;margin-top:18px}
+.pnl{font-size:28px;font-weight:750;margin:8px 0}.pos{color:#50e3a4}.neg{color:#ff6b8a}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}table{width:100%;border-collapse:collapse}
+th,td{padding:7px;border-bottom:1px solid #273047;text-align:right}th{text-align:left;color:#aab4ca}
+.summary-table th:not(:first-child){text-align:right}
+.summary-table th,.summary-table td{white-space:nowrap}
+.detail-table th,.detail-table td{white-space:nowrap}
+.detail-table th:last-child,.detail-table td:last-child{white-space:normal;width:100%;text-align:left}
+p{line-height:1.75}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+/* 横長テーブル（直近の決済など）はページごと横スクロールさせず、
+   テーブル単位で逃がす（2026-07-29 指摘）。 */
+.tblwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+h3 span.pos{color:#50e3a4}h3 span.neg{color:#ff6b8a}
+/* 話題の切れ目を目で追えるようにする（2026-07-28 指摘）。
+   戦略の切れ目 = h3 の上罫線、話題の切れ目 = ラベル付きブロック。 */
+/* 戦略名が長いので損益は常に次行へ落とす（2026-07-29 指摘）。 */
+.card h3{margin:26px 0 10px;padding-top:16px;border-top:1px solid #29324a}
+.card h3:first-of-type{margin-top:6px;padding-top:0;border-top:0}
+.card h3 span{display:block;margin-top:6px}
+/* 読みやすさ（2026-07-29 指摘）: ラベルを見出しに戻す。
+   行長（main の max-width）と角丸は REPORT_CSS 側で一元管理する。 */
+.blk{border-left:3px solid #3a4665;padding:8px 0 8px 14px;margin:18px 0}
+.blk-k{display:block;font-size:15px;font-weight:800;color:#9aa5bd;
+letter-spacing:0;margin-bottom:8px}
+.blk p{margin:0;font-size:15.5px;line-height:1.8}
+/* IV実測は脚別データが長く散文に混ざると行が追えないのでチップへ逃がす。 */
+.ivrow{margin-top:10px}
+.ivrow-k{display:block;font-size:11px;font-weight:700;color:#9aa5bd;
+letter-spacing:.06em;margin-bottom:6px}
+.ivchips{display:flex;flex-wrap:wrap;gap:6px}
+.ivchip{font-size:12.5px;font-variant-numeric:tabular-nums;background:#1a2137;
+border:1px solid #2f3a56;border-radius:999px;padding:3px 10px;color:#cfd6e6;
+white-space:nowrap}
+.ivnote{display:block;margin-top:6px;font-size:11.5px;color:#8b95ad}
+/* 期間グループ（2026-08-01 指摘）: 「3年実績 — X」「直近1年 — X」が同じ
+   階層で並ぶと期間の区切りが読めない。期間を見出しにして中身を字下げする。 */
+.grp{margin:22px 0}
+.grp-k{margin:0 0 10px;font-size:16px;font-weight:800;color:#cfd6e6;
+letter-spacing:.02em}
+.grp-body{padding-left:20px;border-left:2px solid #29324a}
+.grp-body .blk{margin:12px 0}
+.grp-body>p:first-child{margin-top:0}
+/* 戦略ランキング表（2026-08-01 指摘）: 「コンボ」「円」が2行に折り返して
+   読みにくかった。数値列と型列は折り返さず、長い戦略名の列だけで吸収する。
+   既存の .summary-table / .detail-table と同じ nowrap 方式に揃える。 */
+.rank-table th,.rank-table td{white-space:nowrap}
+.rank-table th:nth-child(2),.rank-table td:nth-child(2){white-space:normal}
+/* 指標ヘッダの説明ポップアップ（2026-08-29 指示）。 */
+
+.rank-table th .hdef{background:none;border:0;padding:0;font:inherit;
+color:#8ab4ff;text-decoration:underline;text-decoration-style:dotted;
+text-underline-offset:3px;cursor:pointer}
+.rank-table th .hdef[aria-expanded="true"]{color:#cfe0ff}
+.defpop{position:fixed;z-index:60;max-width:290px;background:#1a2137;
+border:1px solid #3a4665;border-radius:8px;padding:11px 13px;font-size:13px;
+line-height:1.7;color:#e7eaf2;box-shadow:0 10px 28px rgba(0,0,0,.5)}
+
+</style>
+<script>
+(function(){
+  var pop = null, owner = null;
+  function close(){
+    if (owner) { owner.setAttribute('aria-expanded', 'false'); }
+    if (pop && pop.parentNode) { pop.parentNode.removeChild(pop); }
+    pop = null; owner = null;
+  }
+  function place(btn){
+    var r = btn.getBoundingClientRect();
+    var w = pop.offsetWidth, h = pop.offsetHeight, m = 8;
+    var left = Math.min(Math.max(m, r.left), window.innerWidth - w - m);
+    var top = r.bottom + m;
+    if (top + h > window.innerHeight - m) { top = Math.max(m, r.top - h - m); }
+    pop.style.left = Math.max(m, left) + 'px';
+    pop.style.top = top + 'px';
+  }
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    var btn = (t && t.closest) ? t.closest('.hdef') : null;
+    if (!btn) { close(); return; }
+    e.preventDefault();
+    var same = (owner === btn);
+    close();
+    if (same) { return; }
+    pop = document.createElement('div');
+    pop.className = 'defpop';
+    /* 見出し語は表側に出ているので繰り返さない（2026-08-29 指示）。 */
+    pop.textContent = btn.getAttribute('data-def') || '';
+    document.body.appendChild(pop);
+    owner = btn;
+    btn.setAttribute('aria-expanded', 'true');
+    place(btn);
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') { close(); }
+  });
+  window.addEventListener('resize', close);
+  window.addEventListener('scroll', close, true);
+})();
+</script>
+</head><body><main>
+<h1>詳細レビュー</h1><div class="sub">2026-08-17</div>
+
+<article class="card">
+  <h2>全体レビュー</h2>
+  <p>直近5営業日の日経は+3,675円、ATM IVは-2.3ptで、レジームは「上昇・IV低下」。SQまで25日です。</p><p>当日の実質決済損益は単体3件で-875,000円。</p><p>連敗中（2連敗以上）は5戦略（14. トリガードプロテクティブコール (ミニ売/CALL買)、36. ATMバックスプレッド、34. ATMミニ5ロングストラドル (0.5枚相当) 等）。個別レビューの改善方向を参照してください。</p>
+  <div class="grid"><table><tr><th>2026-08-07</th><td>65,615</td></tr><tr><th>2026-08-10</th><td>67,120</td></tr><tr><th>2026-08-12</th><td>67,645</td></tr><tr><th>2026-08-13</th><td>68,200</td></tr><tr><th>2026-08-14</th><td>68,690</td></tr><tr><th>2026-08-17</th><td>69,290</td></tr></table>
+  <table><tr><th>実質決済損益（単体3件）</th><td>-875,000円</td></tr>
+  <tr><th>コンボ決済損益（0件）</th><td>+0円</td></tr>
+  <tr><th>ATM IV</th><td>27.1</td></tr></table></div>
+</article>
+
+<article class="card">
+  <h2>個別戦略レビュー</h2>
+  <h3>35. OTM±3000 ストラングル（ロングボラ型）<span class='neg'> -245,000円</span></h3><div class='blk'><span class='blk-k'>本日の決済</span><p>本日損切りで-245,000円を確定。この決済の要因分解では、時間経過 -206,291円が最大の逆風です。価格変動 +44,718円の追い風では補えず、損失になりました。</p><div class='ivrow'><span class='ivrow-k'>IV実測</span><div class='ivchips'><span class='ivchip'>買いC71,500 27.8%→27.1%（-0.7pt）</span><span class='ivchip'>買いP65,500 31.4%→30.8%（-0.5pt）</span></div><span class='ivnote'>建玉時→決済時、固定ストライクを価格から逆算</span></div></div><div class='blk'><span class='blk-k'>本番の累計実績（参考）</span><p>累計は+2,903,000円の利益です。124回中39勝（直近5件 ×××××）、傾向は悪化、PF 1.16、最大DD -4,790,000円です。</p></div><div class='blk'><span class='blk-k'>タイプの必要条件</span><p>このタイプは大きな価格変動またはIV上昇が必要です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-38,712円で、必要条件は満たされず逆風でした。</p></div><section class='grp'><h4 class='grp-k'>直近3年実績</h4><div class='grp-body'><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉タイミング</span><p>今回は「SQまで3〜4週間で建玉」。3年で123件中63件、勝率40%、平均+92,333円です。この戦略の3年平均+25,593円を66,740円上回る有利な条件です（4帯中1位）。</p></div><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉時IV</span><p>今回は「建玉時IV 30〜35%」。3年で123件中34件、勝率44%、平均+112,176円です。この戦略の3年平均+25,593円を86,583円上回る有利な条件です（4帯中2位）。この軸の最良は「建玉時IV 25〜30%」で18件・勝率28%・平均+193,278円です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・値動き</span><p>今回は「日経が中程度に動いた(±500〜1500円)」。3年で123件中33件、勝率3%、平均-204,364円です。この戦略の3年平均+25,593円を229,957円下回る不利な条件です（3帯中3位）。この軸の最良は「日経が大きく動いた(±1500円超)」で41件・勝率88%・平均+480,024円です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・保有期間</span><p>今回は「3日以内」。3年で123件中49件、勝率29%、平均-54,306円です。この戦略の3年平均+25,593円を79,900円下回る不利な条件です（4帯中3位）。この軸の最良は「8〜14日」で15件・勝率27%・平均+270,733円です。</p></div></div></section><section class='grp'><h4 class='grp-k'>直近1年実績</h4><div class='grp-body'><p>75件、勝率37%、平均+6,453円です（3年平均は+25,593円）。建玉時IV中央値34.7%（3年32.4%）・値幅中央値650円（3年725円）・SQまで17日前に建玉（3年18日前）・保有3日（3年5日）。</p><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉タイミング</span><p>今回の帯「SQまで3〜4週間で建玉」は直近1年で38件（構成比51%、3年では51%）、勝率47%、平均+45,000円です。</p></div><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉時IV</span><p>今回の帯「建玉時IV 30〜35%」は直近1年で28件（構成比37%、3年では28%）、勝率50%、平均+140,643円です。3年の最良帯「建玉時IV 25〜30%」は直近1年では8件（構成比11%、3年15%）です。もともと選ぶ機会の少ない帯です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・値動き</span><p>今回の帯「日経が中程度に動いた(±500〜1500円)」は直近1年で16件（構成比21%、3年では27%）、勝率6%、平均-230,625円です。3年の最良帯「日経が大きく動いた(±1500円超)」は直近1年では28件（構成比37%、3年33%）です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・保有期間</span><p>今回の帯「3日以内」は直近1年で40件（構成比53%、3年では40%）、勝率28%、平均-71,850円です。3年の最良帯「8〜14日」は直近1年では3件（構成比4%、3年12%）です。3年より減っており、この帯を待つ前提は立ちません。</p></div></div></section><div class='blk'><span class='blk-k'>総合判定</span><p>有利は建玉タイミング・建玉時IVの2軸、不利は値動き・保有期間の2軸で同居しています。有利・不利が混在しているため、今回の結果の主因は現時点では特定できません。</p></div><div class='blk'><span class='blk-k'>条件付き再現性</span><p>「3日以内 / SQまで16〜30日」で決済した過去の同戦略は18件、勝率39%、平均-25,167円です（当日を除く3年123件の平均は+25,593円）。同条件は無条件平均より50,760円分劣後しており、戦略そのものの平均よりも決済までの条件差が効いています。本日の-245,000円は3年分布の24%地点で、想定の範囲内です。</p></div><div class='blk'><span class='blk-k'>限月の一貫性</span><p>3年38限月のうちプラスで終えたのは13限月（34%）、単独で月100万円以上に届いたのは4限月です。限月あたりの中央値は-97,000円、最良+4,763,000円 / 最悪-1,127,000円で、毎限月安定して利益を積み上げるタイプではなく、一部の限月の大きな利益が累計損益を押し上げる収益構造です。</p></div><div class='blk'><span class='blk-k'>改善方向</span><p>stop44回が現行±20万円の2倍以内の帯域にありますが、しきい値拡大は最大損失と必要証拠金の増加を伴うため見送り。サンプルは124決済で足りており、サンプル待ちではありません。</p></div><h3>37. OTM±1000 ストラングル（ロングボラ型）<span class='neg'> -305,000円</span></h3><div class='blk'><span class='blk-k'>本日の決済</span><p>本日損切りで-305,000円を確定。この決済の要因分解では、時間経過 -229,500円が最大の逆風です。価格変動 +58,859円の追い風では補えず、損失になりました。</p><div class='ivrow'><span class='ivrow-k'>IV実測</span><div class='ivchips'><span class='ivchip'>買いC69,500 28.3%→27.1%（-1.2pt）</span><span class='ivchip'>買いP67,500 29.8%→29.3%（-0.6pt）</span></div><span class='ivnote'>建玉時→決済時、固定ストライクを価格から逆算</span></div></div><div class='blk'><span class='blk-k'>本番の累計実績（参考）</span><p>累計は+6,227,000円の利益です。207回中76勝（直近5件 ×××○×）、傾向は悪化、PF 1.17、最大DD -5,122,000円です。</p></div><div class='blk'><span class='blk-k'>タイプの必要条件</span><p>このタイプは大きな価格変動またはIV上昇が必要です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-75,498円で、必要条件は満たされず逆風でした。</p></div><section class='grp'><h4 class='grp-k'>直近3年実績</h4><div class='grp-body'><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉タイミング</span><p>今回は「SQまで3〜4週間で建玉」。3年で206件中102件、勝率40%、平均+7,451円です。この戦略の3年平均+31,709円との差は24,258円で、明確な優劣は確認できません（4帯中3位）。この軸の最良は「SQまで1週間以内に建玉」で38件・勝率32%・平均+152,289円です。</p></div><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉時IV</span><p>今回は「建玉時IV 25〜30%」。3年で206件中43件、勝率42%、平均+84,558円です。この戦略の3年平均+31,709円を52,849円上回る有利な条件です（4帯中2位）。この軸の最良は「建玉時IV 30〜35%」で28件・勝率46%・平均+89,143円です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・値動き</span><p>今回は「日経が中程度に動いた(±500〜1500円)」。3年で206件中59件、勝率39%、平均-58,441円です。この戦略の3年平均+31,709円を90,149円下回る不利な条件です（3帯中2位）。この軸の最良は「日経が大きく動いた(±1500円超)」で55件・勝率96%・平均+630,964円です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・保有期間</span><p>今回は「3日以内」。3年で206件中96件、勝率42%、平均+79,375円です。この戦略の3年平均+31,709円との差は47,666円で、明確な優劣は確認できません（3帯中1位）。</p></div></div></section><section class='grp'><h4 class='grp-k'>直近1年実績</h4><div class='grp-body'><p>96件、勝率43%、平均+39,552円です（3年平均は+31,709円）。建玉時IV中央値30.4%（3年26.7%）・値幅中央値912円（3年640円）・SQまで17日前に建玉（3年16日前）・保有3日（3年4日）。</p><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉タイミング</span><p>今回の帯「SQまで3〜4週間で建玉」は直近1年で50件（構成比52%、3年では50%）、勝率46%、平均+43,180円です。3年の最良帯「SQまで1週間以内に建玉」は直近1年では17件（構成比18%、3年18%）です。</p></div><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉時IV</span><p>今回の帯「建玉時IV 25〜30%」は直近1年で30件（構成比31%、3年では21%）、勝率43%、平均+81,500円です。3年の最良帯「建玉時IV 30〜35%」は直近1年では19件（構成比20%、3年14%）です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・値動き</span><p>今回の帯「日経が中程度に動いた(±500〜1500円)」は直近1年で23件（構成比24%、3年では29%）、勝率35%、平均-137,391円です。3年の最良帯「日経が大きく動いた(±1500円超)」は直近1年では35件（構成比36%、3年27%）です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・保有期間</span><p>今回の帯「3日以内」は直近1年で60件（構成比62%、3年では47%）、勝率42%、平均-4,383円です。</p></div></div></section><div class='blk'><span class='blk-k'>総合判定</span><p>有利は建玉時IVの1軸、不利は値動きの1軸で同居しています。有利・不利が混在しているため、今回の結果の主因は現時点では特定できません。</p></div><div class='blk'><span class='blk-k'>条件付き再現性</span><p>「3日以内 / SQまで16〜30日」で決済した過去の同戦略は31件、勝率52%、平均+56,000円です（当日を除く3年206件の平均は+31,709円）。本日の-305,000円は3年分布の17%地点で、想定の範囲内です。</p></div><div class='blk'><span class='blk-k'>限月の一貫性</span><p>3年38限月のうちプラスで終えたのは16限月（42%）、単独で月100万円以上に届いたのは7限月です。限月あたりの中央値は-246,000円、最良+6,442,000円 / 最悪-1,367,000円で、毎限月安定して利益を積み上げるタイプではなく、一部の限月の大きな利益が累計損益を押し上げる収益構造です。</p></div><div class='blk'><span class='blk-k'>改善方向</span><p>stop88回が現行±20万円の2倍以内の帯域にありますが、しきい値拡大は最大損失と必要証拠金の増加を伴うため見送り。サンプルは207決済で足りており、サンプル待ちではありません。</p></div><h3>38. ATM ロングストラドル（ロングボラ型）<span class='neg'> -325,000円</span></h3><div class='blk'><span class='blk-k'>本日の決済</span><p>本日損切りで-325,000円を確定。この決済の要因分解では、時間経過 -233,078円が最大の逆風です。価格変動 +61,375円の追い風では補えず、損失になりました。</p><div class='ivrow'><span class='ivrow-k'>IV実測</span><div class='ivchips'><span class='ivchip'>買いC68,500 29.0%→27.7%（-1.3pt）</span><span class='ivchip'>買いP68,500 29.3%→28.6%（-0.7pt）</span></div><span class='ivnote'>建玉時→決済時、固定ストライクを価格から逆算</span></div></div><div class='blk'><span class='blk-k'>本番の累計実績（参考）</span><p>累計は+8,368,000円の利益です。243回中99勝（直近5件 ××○××）、傾向は悪化、PF 1.19、最大DD -4,018,000円です。</p></div><div class='blk'><span class='blk-k'>タイプの必要条件</span><p>このタイプは大きな価格変動またはIV上昇が必要です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-91,924円で、必要条件は満たされず逆風でした。</p></div><section class='grp'><h4 class='grp-k'>直近3年実績</h4><div class='grp-body'><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉タイミング</span><p>今回は「SQまで3〜4週間で建玉」。3年で242件中118件、勝率47%、平均+59,881円です。この戦略の3年平均+35,921円との差は23,960円で、明確な優劣は確認できません（4帯中1位）。</p></div><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉時IV</span><p>今回は「建玉時IV 25〜30%」。3年で242件中42件、勝率55%、平均+163,619円です。この戦略の3年平均+35,921円を127,698円上回る有利な条件です（4帯中1位）。</p></div><div class='blk'><span class='blk-k'>相場側の条件・保有期間</span><p>今回は「3日以内」。3年で242件中122件、勝率48%、平均+63,836円です。この戦略の3年平均+35,921円との差は27,915円で、明確な優劣は確認できません（3帯中1位）。</p></div><div class='blk'><span class='blk-k'>相場側の条件・値動き</span><p>今回は「日経が中程度に動いた(±500〜1500円)」。3年で242件中78件、勝率59%、平均+75,949円です。この戦略の3年平均+35,921円との差は40,027円で、明確な優劣は確認できません（3帯中2位）。この軸の最良は「日経が大きく動いた(±1500円超)」で48件・勝率100%・平均+737,854円です。</p></div></div></section><section class='grp'><h4 class='grp-k'>直近1年実績</h4><div class='grp-body'><p>106件、勝率43%、平均+40,792円です（3年平均は+35,921円）。建玉時IV中央値29.5%（3年23.4%）・値幅中央値810円（3年620円）・SQまで16日前に建玉（3年16日前）・保有2日（3年3日）。</p><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉タイミング</span><p>今回の帯「SQまで3〜4週間で建玉」は直近1年で53件（構成比50%、3年では49%）、勝率53%、平均+108,453円です。</p></div><div class='blk'><span class='blk-k'>仕掛け側の条件・建玉時IV</span><p>今回の帯「建玉時IV 25〜30%」は直近1年で34件（構成比32%、3年では17%）、勝率59%、平均+179,382円です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・保有期間</span><p>今回の帯「3日以内」は直近1年で69件（構成比65%、3年では50%）、勝率41%、平均-31,565円です。</p></div><div class='blk'><span class='blk-k'>相場側の条件・値動き</span><p>今回の帯「日経が中程度に動いた(±500〜1500円)」は直近1年で30件（構成比28%、3年では32%）、勝率43%、平均-45,400円です。3年の最良帯「日経が大きく動いた(±1500円超)」は直近1年では32件（構成比30%、3年20%）です。</p></div></div></section><div class='blk'><span class='blk-k'>総合判定</span><p>有利な条件は建玉時IVの1軸で、不利な軸はありません。有利な条件で負けており、条件ではなく建玉サイズや決済タイミング側を疑う番です。</p></div><div class='blk'><span class='blk-k'>条件付き再現性</span><p>「3日以内 / SQまで16〜30日」で決済した過去の同戦略は37件、勝率59%、平均+110,811円です（当日を除く3年242件の平均は+35,921円）。同条件は無条件平均より74,889円分優位しており、戦略そのものの平均よりも決済までの条件差が効いています。本日の-325,000円は3年分布の15%地点で、想定の範囲内です。</p></div><div class='blk'><span class='blk-k'>限月の一貫性</span><p>3年38限月のうちプラスで終えたのは16限月（42%）、単独で月100万円以上に届いたのは10限月です。限月あたりの中央値は-310,000円、最良+5,633,000円 / 最悪-1,350,000円で、毎限月安定して利益を積み上げるタイプではなく、一部の限月の大きな利益が累計損益を押し上げる収益構造です。</p></div><div class='blk'><span class='blk-k'>改善方向</span><p>stop111回が現行±20万円の2倍以内の帯域にありますが、しきい値拡大は最大損失と必要証拠金の増加を伴うため見送り。サンプルは243決済で足りており、サンプル待ちではありません。</p></div>
+  <p class="meta">「3年の勝ちパターン」「条件付き再現性」「限月の一貫性」は3年リプレイの決済3,085件から算出しています。建玉時IVは各脚の建値からのBS逆算値で、サンプル10件未満の条件帯は集計から除外しています。</p>
+</article>
+<article class="card">
+  <h3>戦略ランキング３年（2023-07-07〜2026-08-13）（千円）</h3><div class="tblwrap"><table class="rank-table"><thead><tr><th>#</th><th>戦略</th><th><button type="button" class="hdef" data-k="型" data-def="コンボ＝複数の戦略を組み合わせた独立の複合戦略、単体＝単一の戦略。コンボの成績は単体の合算ではありません。">型</button></th><th><button type="button" class="hdef" data-k="通算" data-def="期間中に決済した損益の合計（千円）。未決済の評価損益は含みません。">通算</button></th><th><button type="button" class="hdef" data-k="決済" data-def="期間中に決済が成立した回数。勝率とPFの母数。少ないほど1回の結果に振られます。">決済</button></th><th><button type="button" class="hdef" data-k="勝率" data-def="決済のうち損益がプラスだったものの割合。損益ゼロは勝ちに数えません。1回あたりの金額の大小は見ないので、通算と合わせて読みます。">勝率</button></th><th><button type="button" class="hdef" data-k="PF" data-def="プロフィットファクター。勝ち決済の合計 ÷ 負け決済の合計（絶対値）。1.00で損益トントン、2.00なら損失1に対して利益2。負け決済が1回も無ければ「-」。">PF</button></th><th><button type="button" class="hdef" data-k="最大DD" data-def="最大ドローダウン。決済を日付順に積み上げた累積損益が、それまでの最高値からいちばん深く沈んだ幅。途中でどこまで資金を削られるかの目安。">最大DD</button></th><th><button type="button" class="hdef" data-k="1決済最大損" data-def="期間中で最も損の大きかった1決済の金額。1回の失敗で受ける打撃の上限。最大DDは連敗の積み重ねなので別の軸。">1決済最大損</button></th><th><button type="button" class="hdef" data-k="臨時決済/年" data-def="SQ以外の理由（利確・損切りなど）で決済した回数の年換算。SQ決済とSQロールは日付が決まっている定例なので数えない。多いほど期中に手を動かす必要がある。">臨時決済/年</button></th></tr></thead><tbody><tr><td>1</td><td style="text-align:left">ATM±500カレンダー+OTM±3000ダイアゴナル+OTM±2000リバース・アイアンコンドル</td><td>コンボ</td><td>17,686</td><td>91</td><td>67%</td><td>2.69</td><td>-1,313</td><td>-760</td><td>17.1</td></tr><tr><td>2</td><td style="text-align:left">OTM±2000レシオ+ミニ5+ATM±500カレンダー</td><td>コンボ</td><td>17,670</td><td>197</td><td>56%</td><td>1.74</td><td>-2,416</td><td>-1,297</td><td>51.3</td></tr><tr><td>3</td><td style="text-align:left">ATMダイアゴナル+OTM±2000リバース・アイアンコンドル+OTM±3000バタフライ</td><td>コンボ</td><td>17,039</td><td>79</td><td>68%</td><td>3.45</td><td>-875</td><td>-617</td><td>13.2</td></tr><tr><td>4</td><td style="text-align:left">ATM±500カレンダー+OTM±3000ダイアゴナル</td><td>コンボ</td><td>13,820</td><td>79</td><td>72%</td><td>2.56</td><td>-1,664</td><td>-1,047</td><td>13.2</td></tr><tr><td>5</td><td style="text-align:left">OTM±2000レシオ+ATM±500カレンダー</td><td>コンボ</td><td>13,819</td><td>77</td><td>77%</td><td>2.55</td><td>-1,827</td><td>-1,827</td><td>12.6</td></tr><tr><td>6</td><td style="text-align:left">OTM±2000レシオ+ミニ5ストラドル</td><td>コンボ</td><td>12,028</td><td>208</td><td>49%</td><td>1.45</td><td>-4,142</td><td>-1,358</td><td>54.8</td></tr><tr><td>7</td><td style="text-align:left">ATMダイアゴナル+OTM±2000リバース・アイアンコンドル</td><td>コンボ</td><td>11,673</td><td>58</td><td>69%</td><td>4.19</td><td>-851</td><td>-481</td><td>6.4</td></tr><tr><td>8</td><td style="text-align:left">ATM±500カレンダー+OTM±3000バタフライ</td><td>コンボ</td><td>10,531</td><td>58</td><td>67%</td><td>3.72</td><td>-975</td><td>-542</td><td>6.4</td></tr><tr><td>9</td><td style="text-align:left">ATMレシオスプレッド</td><td>単体</td><td>9,934</td><td>100</td><td>55%</td><td>1.53</td><td>-3,799</td><td>-1,362</td><td>20.3</td></tr><tr><td>10</td><td style="text-align:left">ATMリバース・アイアンバタフライ（翼±3000）</td><td>単体</td><td>9,857</td><td>102</td><td>49%</td><td>1.49</td><td>-4,479</td><td>-930</td><td>21.9</td></tr></tbody></table></div><h3>戦略ランキング１年（2025-08-13〜2026-08-13）（千円）</h3><div class="tblwrap"><table class="rank-table"><thead><tr><th>#</th><th>戦略</th><th><button type="button" class="hdef" data-k="型" data-def="コンボ＝複数の戦略を組み合わせた独立の複合戦略、単体＝単一の戦略。コンボの成績は単体の合算ではありません。">型</button></th><th><button type="button" class="hdef" data-k="通算" data-def="期間中に決済した損益の合計（千円）。未決済の評価損益は含みません。">通算</button></th><th><button type="button" class="hdef" data-k="決済" data-def="期間中に決済が成立した回数。勝率とPFの母数。少ないほど1回の結果に振られます。">決済</button></th><th><button type="button" class="hdef" data-k="勝率" data-def="決済のうち損益がプラスだったものの割合。損益ゼロは勝ちに数えません。1回あたりの金額の大小は見ないので、通算と合わせて読みます。">勝率</button></th><th><button type="button" class="hdef" data-k="PF" data-def="プロフィットファクター。勝ち決済の合計 ÷ 負け決済の合計（絶対値）。1.00で損益トントン、2.00なら損失1に対して利益2。負け決済が1回も無ければ「-」。">PF</button></th><th><button type="button" class="hdef" data-k="最大DD" data-def="最大ドローダウン。決済を日付順に積み上げた累積損益が、それまでの最高値からいちばん深く沈んだ幅。途中でどこまで資金を削られるかの目安。">最大DD</button></th><th><button type="button" class="hdef" data-k="1決済最大損" data-def="期間中で最も損の大きかった1決済の金額。1回の失敗で受ける打撃の上限。最大DDは連敗の積み重ねなので別の軸。">1決済最大損</button></th><th><button type="button" class="hdef" data-k="臨時決済/年" data-def="SQ以外の理由（利確・損切りなど）で決済した回数の年換算。SQ決済とSQロールは日付が決まっている定例なので数えない。多いほど期中に手を動かす必要がある。">臨時決済/年</button></th></tr></thead><tbody><tr><td>1</td><td style="text-align:left">OTM±2000レシオ+ミニ5+ATM±500カレンダー</td><td>コンボ</td><td>12,212</td><td>99</td><td>58%</td><td>1.93</td><td>-2,416</td><td>-1,297</td><td>87.0</td></tr><tr><td>2</td><td style="text-align:left">OTM±2000レシオ+ATM±500カレンダー</td><td>コンボ</td><td>11,686</td><td>41</td><td>85%</td><td>3.78</td><td>-1,827</td><td>-1,827</td><td>29.0</td></tr><tr><td>3</td><td style="text-align:left">ATM±500カレンダー+OTM±3000ダイアゴナル</td><td>コンボ</td><td>10,266</td><td>46</td><td>74%</td><td>2.68</td><td>-1,664</td><td>-1,047</td><td>34.0</td></tr><tr><td>4</td><td style="text-align:left">ATM±500カレンダー+OTM±3000ダイアゴナル+OTM±2000リバース・アイアンコンドル</td><td>コンボ</td><td>10,207</td><td>45</td><td>69%</td><td>2.59</td><td>-1,313</td><td>-760</td><td>33.0</td></tr><tr><td>5</td><td style="text-align:left">ATMダイアゴナル+OTM±2000リバース・アイアンコンドル+OTM±3000バタフライ</td><td>コンボ</td><td>9,374</td><td>35</td><td>74%</td><td>4.09</td><td>-875</td><td>-447</td><td>23.0</td></tr><tr><td>6</td><td style="text-align:left">ATMレシオスプレッド</td><td>単体</td><td>7,747</td><td>39</td><td>67%</td><td>2.33</td><td>-1,095</td><td>-732</td><td>27.0</td></tr><tr><td>7</td><td style="text-align:left">ATMダイアゴナル+OTM±2000リバース・アイアンコンドル</td><td>コンボ</td><td>7,376</td><td>26</td><td>77%</td><td>8.42</td><td>-484</td><td>-460</td><td>14.0</td></tr><tr><td>8</td><td style="text-align:left">OTM±2000レシオ+ミニ5ストラドル</td><td>コンボ</td><td>7,098</td><td>91</td><td>54%</td><td>1.57</td><td>-1,668</td><td>-1,358</td><td>79.0</td></tr><tr><td>9</td><td style="text-align:left">ATM±500カレンダー+OTM±3000バタフライ</td><td>コンボ</td><td>7,085</td><td>26</td><td>77%</td><td>5.71</td><td>-975</td><td>-542</td><td>14.0</td></tr><tr><td>10</td><td style="text-align:left">ATM±500カレンダー</td><td>単体</td><td>6,328</td><td>30</td><td>67%</td><td>2.75</td><td>-791</td><td>-746</td><td>18.0</td></tr></tbody></table></div>
+</article>
+</main></body></html>

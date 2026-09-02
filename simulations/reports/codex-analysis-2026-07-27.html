@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>決済ミクロ分析 2026-07-27</title>
+<style>
+body{margin:0;background:#0b1020;color:#e7eaf2;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{margin:auto;padding:28px 18px 60px}h1{margin-bottom:4px}.sub,.meta,.tag{color:#9aa5bd}
+.card,.empty,.notice{background:#12182a;border:1px solid #29324a;border-radius:14px;padding:20px;margin-top:18px}
+.pnl{font-size:28px;font-weight:750;margin:8px 0}.pos{color:#50e3a4}.neg{color:#ff6b8a}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}table{width:100%;border-collapse:collapse}
+th,td{padding:7px;border-bottom:1px solid #273047;text-align:right}th{text-align:left;color:#aab4ca}
+.summary-table th:not(:first-child){text-align:right}
+.detail-table th,.detail-table td{white-space:nowrap}
+.detail-table th:last-child,.detail-table td:last-child{white-space:normal;width:100%;text-align:left}
+p{line-height:1.75}@media(max-width:700px){.grid{grid-template-columns:1fr}}
+</style></head><body><main>
+<h1>決済ミクロ分析</h1><div class="sub">決済ミクロ分析 ・ 2026-07-27 ・ 対象9件</div>
+
+<article class="card overall">
+  <h2>全体評価</h2>
+  <p>SQまで18日の局面です。ボラ拡大系（ロングボラ/スプレッド型）は4戦略中0勝、比較用合計-1,500,000円で、ボラ拡大型の弱さが目立ちました。一方、ディケイ型（OTM/ATM）は2勝、比較用合計+504,500円と時間経過を利益に変えた戦略が優位でした。当日トップはトリガードカバードプット (ミニ売/PUT売)の+269,500円です。継続力を含む最強候補はOTM±3000レシオスプレッドです。当日+235,000円、過去8件の勝率62%、平均+61,750円で、当日と過去の両方がプラスです。</p>
+  <table><tr><th>戦略タイプ</th><th>勝数</th><th>比較用合計</th><th>平均</th></tr><tr><th>ロングボラ型</th><td>0/4</td><td>¥-1,500,000</td><td>¥-375,000</td></tr><tr><th>OTMディケイ型</th><td>2/2</td><td>¥+504,500</td><td>¥+252,250</td></tr><tr><th>ヘッジ型</th><td>0/1</td><td>¥-269,500</td><td>¥-269,500</td></tr><tr><th>コンボ型</th><td>0/2</td><td>¥-557,500</td><td>¥-278,750</td></tr></table>
+  <div class="grid"><div><h3>利益上位</h3><ol><li>トリガードカバードプット (ミニ売/PUT売): ¥+269,500</li><li>OTM±3000レシオスプレッド: ¥+235,000</li></ol></div>
+  <div><h3>損失上位</h3><ol><li>ATM ロングストラドル: ¥-485,000</li><li>OTM±3000 ストラングル: ¥-350,000</li><li>OTM±1000 ストラングル: ¥-350,000</li></ol></div></div>
+</article>
+<article class="card">
+  <h2>5. OTM±3000レシオ+ミニ5ストラドル</h2>
+  <div class="pnl neg">¥-242,500</div>
+  <div class="meta">2026-07-21 → 2026-07-27 ・ 保有6日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は-242,500円の損失です。構成別ではATMミニ5ロングストラドル (0.5枚相当)が-242,500円と損失の中心でした。モデル推定では、6日間の保有、SQまで18日での時間経過 -286,408円が最大の逆風でした。日経-1,145円に伴う価格変動 +47,335円は追い風、IV変化 -3,426円は逆風でしたが、追い風でも損失側の寄与を補えず最終損益に至りました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC66,500 33.0%→33.0%（-0.1pt）・買いP66,500 33.0%→33.0%（-0.1pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は11件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>コンボ型の勝ち筋は「構成別の損益が補完し、単体よりもドローダウンを抑えること」です。構成別では0/1構成が利益側です。単体トラックと同じ損益として扱わず、補完効果の有無で見るべき決済です。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去11件、平均¥+46,136、PF 1.12、最大DD¥-738,500。累計優位は残るため、即停止ではなく今回の地合い不適合として扱います。</p>
+  <h3>改善方向</h3><p>次回は同じ敗因が再発するかを確認し、単発の地合い不適合か構造問題かを分けます。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>11</td></tr>
+      <tr><th>過去勝率</th><td>45%</td></tr>
+      <tr><th>過去平均損益</th><td>¥+46,136</td></tr>
+      <tr><th>日経変化</th><td>-1,145</td></tr>
+      <tr><th>累計損益</th><td>¥+265,000</td></tr><tr><th>直近</th><td>○×○○×</td></tr><tr><th>PF</th><td>1.12</td></tr><tr><th>最大DD</th><td>¥-738,500</td></tr><tr><th>連敗</th><td>1</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+47,335</td></tr><tr><th>IV変化</th><td>¥-3,426</td></tr><tr><th>時間経過</th><td>¥-286,408</td></tr><tr><th>残差</th><td>¥+0</td></tr></table>
+  </div>
+  <h4>コンボ構成別</h4><ul><li>ATMミニ5ロングストラドル (0.5枚相当): ¥-242,500</li></ul>
+</article>
+<article class="card">
+  <h2>8. トリガードカバードプット (ミニ売/PUT売)</h2>
+  <div class="pnl pos">¥+269,500</div>
+  <div class="meta">2026-07-10 → 2026-07-27 ・ 保有17日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は+269,500円の利益です。モデル推定では、17日間の保有、SQまで18日での時間経過 +642,424円が最大の追い風でした。IV変化 -197,106円は逆風、日経-3,695円に伴う価格変動 -175,820円は逆風でしたが、追い風が逆風を上回り利益を残しました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 売りP59,500 38.2%→41.6%（+3.4pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は1件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>OTMディケイ型の勝ち筋は「相場が走りすぎず、時間経過を利益として回収できること」です。今回は時間経過が利益側に働き、勝ち筋に沿った決済です。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去1件、平均¥+276,500、PFは損失なし/データ不足、最大DD¥+0。今回と過去平均がともにプラスで、現行ルール継続を優先できます。</p>
+  <h3>改善方向</h3><p>今回の条件を成功サンプルとして残し、同じSQ残日数・IV変化・日経変化で再現するか確認します。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>1</td></tr>
+      <tr><th>過去勝率</th><td>100%</td></tr>
+      <tr><th>過去平均損益</th><td>¥+276,500</td></tr>
+      <tr><th>日経変化</th><td>-3,695</td></tr>
+      <tr><th>累計損益</th><td>¥+546,000</td></tr><tr><th>直近</th><td>○○</td></tr><tr><th>PF</th><td>損失なし</td></tr><tr><th>最大DD</th><td>¥+0</td></tr><tr><th>連敗</th><td>0</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥-175,820</td></tr><tr><th>IV変化</th><td>¥-197,106</td></tr><tr><th>時間経過</th><td>¥+642,424</td></tr><tr><th>残差</th><td>¥+1</td></tr></table>
+  </div>
+  
+</article>
+<article class="card">
+  <h2>12. ATM ロングストラドル</h2>
+  <div class="pnl neg">¥-485,000</div>
+  <div class="meta">2026-07-21 → 2026-07-27 ・ 保有6日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は-485,000円の損失です。モデル推定では、6日間の保有、SQまで18日での時間経過 -572,817円が最大の逆風でした。日経-1,145円に伴う価格変動 +94,670円は追い風、IV変化 -6,853円は逆風でしたが、追い風でも損失側の寄与を補えず最終損益に至りました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC66,500 33.0%→33.0%（-0.1pt）・買いP66,500 33.0%→33.0%（-0.1pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は22件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>ロングボラ型の勝ち筋は「大きな価格変動、またはIV上昇/維持が時間経過を上回ること」です。今回は価格変動+IV変化が¥+87,817、時間経過が¥-572,817で、ロングボラの勝ち筋を十分に満たせませんでした。</p>
+  <h3>レビュー判断</h3><p>サンプル数は一定あります。 過去22件、平均¥+121,182、PF 1.49、最大DD¥-1,649,000。累計優位は残るため、即停止ではなく今回の地合い不適合として扱います。</p>
+  <h3>改善方向</h3><p>ATMロングはガンマを買う戦略なので、建玉後2営業日で値幅が出ずIVも低下するなら、損切り幅調整ではなく時間制限付きの撤退ルールを検討します。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>22</td></tr>
+      <tr><th>過去勝率</th><td>50%</td></tr>
+      <tr><th>過去平均損益</th><td>¥+121,182</td></tr>
+      <tr><th>日経変化</th><td>-1,145</td></tr>
+      <tr><th>累計損益</th><td>¥+2,181,000</td></tr><tr><th>直近</th><td>××○○×</td></tr><tr><th>PF</th><td>1.49</td></tr><tr><th>最大DD</th><td>¥-1,649,000</td></tr><tr><th>連敗</th><td>1</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+94,670</td></tr><tr><th>IV変化</th><td>¥-6,853</td></tr><tr><th>時間経過</th><td>¥-572,817</td></tr><tr><th>残差</th><td>¥+0</td></tr></table>
+  </div>
+  
+</article>
+<article class="card">
+  <h2>17. OTM±3000レシオスプレッド</h2>
+  <div class="pnl pos">¥+235,000</div>
+  <div class="meta">2026-07-17 → 2026-07-27 ・ 保有10日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は+235,000円の利益です。モデル推定では、10日間の保有、SQまで18日での時間経過 +434,204円が最大の追い風でした。IV変化 -237,441円は逆風、日経+1,100円に伴う価格変動 +38,242円は追い風でしたが、追い風が逆風を上回り利益を残しました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC67,000 33.2%→32.8%（-0.4pt）・売りC70,000 31.3%→31.9%（+0.5pt）・買いP61,000 37.4%→39.1%（+1.7pt）・売りP58,000 41.5%→44.4%（+2.9pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は8件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>OTMディケイ型の勝ち筋は「相場が走りすぎず、時間経過を利益として回収できること」です。今回は時間経過が利益側に働き、勝ち筋に沿った決済です。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去8件、平均¥+61,750、PF 1.87、最大DD¥-437,000。今回と過去平均がともにプラスで、現行ルール継続を優先できます。</p>
+  <h3>改善方向</h3><p>今回の条件を成功サンプルとして残し、同じSQ残日数・IV変化・日経変化で再現するか確認します。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>8</td></tr>
+      <tr><th>過去勝率</th><td>62%</td></tr>
+      <tr><th>過去平均損益</th><td>¥+61,750</td></tr>
+      <tr><th>日経変化</th><td>+1,100</td></tr>
+      <tr><th>累計損益</th><td>¥+729,000</td></tr><tr><th>直近</th><td>×○○×○</td></tr><tr><th>PF</th><td>1.87</td></tr><tr><th>最大DD</th><td>¥-437,000</td></tr><tr><th>連敗</th><td>0</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+38,242</td></tr><tr><th>IV変化</th><td>¥-237,441</td></tr><tr><th>時間経過</th><td>¥+434,204</td></tr><tr><th>残差</th><td>¥-5</td></tr></table>
+  </div>
+  
+</article>
+<article class="card">
+  <h2>22. ATMミニ5ロングストラドル (0.5枚相当)</h2>
+  <div class="pnl neg">¥-315,000</div>
+  <div class="meta">2026-07-17 → 2026-07-27 ・ 保有10日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は-315,000円の損失です。モデル推定では、10日間の保有、SQまで18日での時間経過 -491,215円が最大の逆風でした。IV変化 +115,179円は追い風、日経+1,100円に伴う価格変動 +61,036円は追い風でしたが、追い風でも損失側の寄与を補えず最終損益に至りました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC64,000 33.8%→35.4%（+1.6pt）・買いP64,000 33.8%→35.4%（+1.6pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は8件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>ロングボラ型の勝ち筋は「大きな価格変動、またはIV上昇/維持が時間経過を上回ること」です。今回は価格変動+IV変化が¥+176,215、時間経過が¥-491,215で、ロングボラの勝ち筋を十分に満たせませんでした。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去8件、平均¥-71,188、PF 0.54、最大DD¥-1,022,000。当日損失かつ過去成績の支えも弱く、構造か建玉条件の見直し候補です。</p>
+  <h3>改善方向</h3><p>価格変動+IV変化が伸びない日は、ロングボラを維持する条件を厳しくします。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>8</td></tr>
+      <tr><th>過去勝率</th><td>25%</td></tr>
+      <tr><th>過去平均損益</th><td>¥-71,188</td></tr>
+      <tr><th>日経変化</th><td>+1,100</td></tr>
+      <tr><th>累計損益</th><td>¥-884,500</td></tr><tr><th>直近</th><td>×××○×</td></tr><tr><th>PF</th><td>0.54</td></tr><tr><th>最大DD</th><td>¥-1,022,000</td></tr><tr><th>連敗</th><td>1</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+61,036</td></tr><tr><th>IV変化</th><td>¥+115,179</td></tr><tr><th>時間経過</th><td>¥-491,215</td></tr><tr><th>残差</th><td>¥-1</td></tr></table>
+  </div>
+  
+</article>
+<article class="card">
+  <h2>23. トリガードプロテクティブプット (ミニ買/PUT買)</h2>
+  <div class="pnl neg">¥-269,500</div>
+  <div class="meta">2026-07-10 → 2026-07-27 ・ 保有17日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は-269,500円の損失です。モデル推定では、17日間の保有、SQまで18日での時間経過 -642,424円が最大の逆風でした。IV変化 +197,106円は追い風、日経-3,695円に伴う価格変動 +175,820円は追い風でしたが、追い風でも損失側の寄与を補えず最終損益に至りました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いP59,500 38.2%→41.6%（+3.4pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は1件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>ヘッジ型の勝ち筋は「単体利益よりも、急変時の損失抑制や保険効果を発揮すること」です。今回は当日損益と要因分解を優先し、同タイプ内の継続性で判断します。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去1件、平均¥-276,500、PF 0.00、最大DD¥-546,000。連敗後の損失決済で、現行ルールのまま続けるより条件の絞り込みを検討する局面です。</p>
+  <h3>改善方向</h3><p>連敗中のため、次回も同じ敗因なら構造変更またはトラック停止候補として扱います。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>1</td></tr>
+      <tr><th>過去勝率</th><td>0%</td></tr>
+      <tr><th>過去平均損益</th><td>¥-276,500</td></tr>
+      <tr><th>日経変化</th><td>-3,695</td></tr>
+      <tr><th>累計損益</th><td>¥-546,000</td></tr><tr><th>直近</th><td>××</td></tr><tr><th>PF</th><td>0.00</td></tr><tr><th>最大DD</th><td>¥-546,000</td></tr><tr><th>連敗</th><td>2</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+175,820</td></tr><tr><th>IV変化</th><td>¥+197,106</td></tr><tr><th>時間経過</th><td>¥-642,424</td></tr><tr><th>残差</th><td>¥-1</td></tr></table>
+  </div>
+  
+</article>
+<article class="card">
+  <h2>29. OTM±3000レシオ+ミニ5+ATMカレンダー</h2>
+  <div class="pnl neg">¥-315,000</div>
+  <div class="meta">2026-07-17 → 2026-07-27 ・ 保有10日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は-315,000円の損失です。構成別ではATMミニ5ロングストラドル (0.5枚相当)が-315,000円と損失の中心でした。モデル推定では、10日間の保有、SQまで18日での時間経過 -491,215円が最大の逆風でした。IV変化 +115,179円は追い風、日経+1,100円に伴う価格変動 +61,036円は追い風でしたが、追い風でも損失側の寄与を補えず最終損益に至りました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC64,000 33.8%→35.4%（+1.6pt）・買いP64,000 33.8%→35.4%（+1.6pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は10件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>コンボ型の勝ち筋は「構成別の損益が補完し、単体よりもドローダウンを抑えること」です。構成別では0/1構成が利益側です。単体トラックと同じ損益として扱わず、補完効果の有無で見るべき決済です。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去10件、平均¥+152,272、PF 1.45、最大DD¥-1,497,000。連敗後の損失決済で、現行ルールのまま続けるより条件の絞り込みを検討する局面です。</p>
+  <h3>改善方向</h3><p>連敗中のため、次回も同じ敗因なら構造変更またはトラック停止候補として扱います。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>10</td></tr>
+      <tr><th>過去勝率</th><td>50%</td></tr>
+      <tr><th>過去平均損益</th><td>¥+152,272</td></tr>
+      <tr><th>日経変化</th><td>+1,100</td></tr>
+      <tr><th>累計損益</th><td>¥+1,207,725</td></tr><tr><th>直近</th><td>○×○××</td></tr><tr><th>PF</th><td>1.45</td></tr><tr><th>最大DD</th><td>¥-1,497,000</td></tr><tr><th>連敗</th><td>2</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+61,036</td></tr><tr><th>IV変化</th><td>¥+115,179</td></tr><tr><th>時間経過</th><td>¥-491,215</td></tr><tr><th>残差</th><td>¥-1</td></tr></table>
+  </div>
+  <h4>コンボ構成別</h4><ul><li>ATMミニ5ロングストラドル (0.5枚相当): ¥-315,000</li></ul>
+</article>
+<article class="card">
+  <h2>30. OTM±3000 ストラングル</h2>
+  <div class="pnl neg">¥-350,000</div>
+  <div class="meta">2026-07-24 → 2026-07-27 ・ 保有3日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は-350,000円の損失です。モデル推定では、3日間の保有、SQまで18日での時間経過 -276,908円が最大の逆風でした。IV変化 -104,595円は逆風、日経+605円に伴う価格変動 +31,502円は追い風でしたが、追い風でも損失側の寄与を補えず最終損益に至りました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC67,500 34.0%→32.6%（-1.5pt）・買いP61,500 38.9%→38.5%（-0.4pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は16件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>ロングボラ型の勝ち筋は「大きな価格変動、またはIV上昇/維持が時間経過を上回ること」です。今回は価格変動+IV変化が¥-73,093、時間経過が¥-276,908で、ロングボラの勝ち筋を十分に満たせませんでした。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去16件、平均¥+11,000、PF 0.95、最大DD¥-2,199,000。連敗後の損失決済で、現行ルールのまま続けるより条件の絞り込みを検討する局面です。</p>
+  <h3>改善方向</h3><p>OTM±3000はテールイベント専用に近いため、通常の下落幅で建て続けるより、IV急上昇初動または想定以上の値幅が出た日に限定する方向で見直します。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>16</td></tr>
+      <tr><th>過去勝率</th><td>38%</td></tr>
+      <tr><th>過去平均損益</th><td>¥+11,000</td></tr>
+      <tr><th>日経変化</th><td>+605</td></tr>
+      <tr><th>累計損益</th><td>¥-174,000</td></tr><tr><th>直近</th><td>××○××</td></tr><tr><th>PF</th><td>0.95</td></tr><tr><th>最大DD</th><td>¥-2,199,000</td></tr><tr><th>連敗</th><td>2</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+31,502</td></tr><tr><th>IV変化</th><td>¥-104,595</td></tr><tr><th>時間経過</th><td>¥-276,908</td></tr><tr><th>残差</th><td>¥+1</td></tr></table>
+  </div>
+  
+</article>
+<article class="card">
+  <h2>31. OTM±1000 ストラングル</h2>
+  <div class="pnl neg">¥-350,000</div>
+  <div class="meta">2026-07-24 → 2026-07-27 ・ 保有3日 ・ SQまで18日</div>
+  <h3>成功・失敗の主因</h3><p>実損益は-350,000円の損失です。モデル推定では、3日間の保有、SQまで18日での時間経過 -313,689円が最大の逆風でした。IV変化 -82,437円は逆風、日経+605円に伴う価格変動 +46,125円は追い風でしたが、追い風でも損失側の寄与を補えず最終損益に至りました。</p>
+  <p class='meta'>IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC65,500 35.2%→34.0%（-1.2pt）・買いP63,500 36.1%→36.0%（-0.1pt）。</p>
+  <h3>再現性</h3><p>同戦略の過去決済は16件のため、今回だけで再現性を断定できません。</p>
+  <h3>勝ち筋との照合</h3><p>ロングボラ型の勝ち筋は「大きな価格変動、またはIV上昇/維持が時間経過を上回ること」です。今回は価格変動+IV変化が¥-36,312、時間経過が¥-313,689で、ロングボラの勝ち筋を十分に満たせませんでした。</p>
+  <h3>レビュー判断</h3><p>まだサンプル不足です。 過去16件、平均¥+1,875、PF 0.93、最大DD¥-2,620,000。連敗後の損失決済で、現行ルールのまま続けるより条件の絞り込みを検討する局面です。</p>
+  <h3>改善方向</h3><p>OTM±1000は方向確認が遅れると両脚の減価を受けやすいため、建玉後すぐに片側の価格変動寄与が伸びない場合の早期撤退、またはATM寄せを検討します。</p>
+  <div class="grid">
+    <table><tr><th>過去件数</th><td>16</td></tr>
+      <tr><th>過去勝率</th><td>38%</td></tr>
+      <tr><th>過去平均損益</th><td>¥+1,875</td></tr>
+      <tr><th>日経変化</th><td>+605</td></tr>
+      <tr><th>累計損益</th><td>¥-320,000</td></tr><tr><th>直近</th><td>××○××</td></tr><tr><th>PF</th><td>0.93</td></tr><tr><th>最大DD</th><td>¥-2,620,000</td></tr><tr><th>連敗</th><td>2</td></tr></table>
+    <table><tr><th>価格変動</th><td>¥+46,125</td></tr><tr><th>IV変化</th><td>¥-82,437</td></tr><tr><th>時間経過</th><td>¥-313,689</td></tr><tr><th>残差</th><td>¥-2</td></tr></table>
+  </div>
+  
+</article>
+<article class="card">
+  <h2>累積決済レビュー</h2>
+  <p class="meta">日経変動の絶対値でレジームを3帯に分け、戦略グループ別に集計しています。</p>
+  <table class='summary-table'><thead><tr><th>戦略グループ</th><th>1,000pt未満</th><th>1,000〜3,000pt</th><th>3,000pt超</th></tr></thead><tbody><tr><td style='text-align:left'>ロングボラ型</td><td>30件 勝0% <span class='neg'>-37万円</span></td><td>26件 勝57% <span class='pos'>+19万円</span></td><td>7件 勝100% <span class='pos'>+82万円</span></td></tr><tr><td style='text-align:left'>スプレッド系ボラ拡大型</td><td>12件 勝8% <span class='neg'>-23万円</span></td><td>19件 勝52% <span class='pos'>+20万円</span></td><td>4件 勝100% <span class='pos'>+46万円</span></td></tr><tr><td style='text-align:left'>OTMディケイ型</td><td>10件 勝60% <span class='pos'>+6万円</span></td><td>12件 勝83% <span class='pos'>+15万円</span></td><td>5件 勝80% <span class='pos'>+12万円</span></td></tr><tr><td style='text-align:left'>カレンダー/ダイアゴナル型</td><td>9件 勝100% <span class='pos'>+36万円</span></td><td>9件 勝88% <span class='pos'>+25万円</span></td><td>10件 勝10% <span class='neg'>-31万円</span></td></tr><tr><td style='text-align:left'>ATMニアディケイ型</td><td>7件 勝100% <span class='pos'>+46万円</span></td><td>13件 勝46% <span class='neg'>-3万円</span></td><td>2件 勝50% <span class='pos'>+4万円</span></td></tr><tr><td style='text-align:left'>ヘッジ型</td><td>2件 勝0% <span class='neg'>-14万円</span></td><td>2件 勝0% <span class='neg'>-21万円</span></td><td>1件 勝0% <span class='neg'>-27万円</span></td></tr></tbody></table>
+  <h3>直近の決済</h3>
+  <table class='detail-table'><thead><tr><th>日付</th><th>戦略</th><th>結果</th><th>損益</th><th>条件</th><th>損益理由</th></tr></thead><tbody><tr><td style='text-align:left'>2026-07-27</td><td style='text-align:left'>ATM ロングストラドル</td><td style='text-align:left'>損切り</td><td><span class='neg'>-485,000円</span></td><td style='text-align:left'>6日 ｜ -1,145pt ｜ IV +2.7</td><td style='text-align:left'>時間経過 -572,817円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-27</td><td style='text-align:left'>OTM±3000レシオスプレッド</td><td style='text-align:left'>利確</td><td><span class='pos'>+235,000円</span></td><td style='text-align:left'>10日 ｜ +1,100pt ｜ IV +3.1</td><td style='text-align:left'>時間経過 +434,204円が最大の追い風</td></tr><tr><td style='text-align:left'>2026-07-27</td><td style='text-align:left'>OTM±1000 ストラングル</td><td style='text-align:left'>損切り</td><td><span class='neg'>-350,000円</span></td><td style='text-align:left'>3日 ｜ +605pt ｜ IV +1.1</td><td style='text-align:left'>時間経過 -313,689円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-27</td><td style='text-align:left'>OTM±3000 ストラングル</td><td style='text-align:left'>損切り</td><td><span class='neg'>-350,000円</span></td><td style='text-align:left'>3日 ｜ +605pt ｜ IV +1.1</td><td style='text-align:left'>時間経過 -276,908円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-27</td><td style='text-align:left'>トリガードカバードプット (ミニ売/PUT売)</td><td style='text-align:left'>利確</td><td><span class='pos'>+269,500円</span></td><td style='text-align:left'>17日 ｜ -3,695pt ｜ IV +4.5</td><td style='text-align:left'>時間経過 +642,424円が最大の追い風</td></tr><tr><td style='text-align:left'>2026-07-27</td><td style='text-align:left'>トリガードプロテクティブプット (ミニ買/PUT買)</td><td style='text-align:left'>損切り</td><td><span class='neg'>-269,500円</span></td><td style='text-align:left'>17日 ｜ -3,695pt ｜ IV +4.5</td><td style='text-align:left'>時間経過 -642,424円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-27</td><td style='text-align:left'>ATMミニ5ロングストラドル (0.5枚相当)</td><td style='text-align:left'>損切り</td><td><span class='neg'>-315,000円</span></td><td style='text-align:left'>10日 ｜ +1,100pt ｜ IV +3.1</td><td style='text-align:left'>時間経過 -491,215円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-24</td><td style='text-align:left'>ATM±3000カレンダー</td><td style='text-align:left'>損切り</td><td><span class='neg'>-415,000円</span></td><td style='text-align:left'>14日 ｜ -4,300pt ｜ IV +3.4</td><td style='text-align:left'>IV変化 -329,429円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-24</td><td style='text-align:left'>ATMレシオスプレッド</td><td style='text-align:left'>利確</td><td><span class='pos'>+485,000円</span></td><td style='text-align:left'>7日 ｜ +495pt ｜ IV +2.0</td><td style='text-align:left'>時間経過 +552,586円が最大の追い風</td></tr><tr><td style='text-align:left'>2026-07-24</td><td style='text-align:left'>OTM±1000 ストラングル</td><td style='text-align:left'>損切り</td><td><span class='neg'>-435,000円</span></td><td style='text-align:left'>7日 ｜ +495pt ｜ IV +2.0</td><td style='text-align:left'>時間経過 -682,568円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-24</td><td style='text-align:left'>OTM±3000 ストラングル</td><td style='text-align:left'>損切り</td><td><span class='neg'>-385,000円</span></td><td style='text-align:left'>7日 ｜ +495pt ｜ IV +2.0</td><td style='text-align:left'>時間経過 -621,092円が最大の逆風</td></tr><tr><td style='text-align:left'>2026-07-24</td><td style='text-align:left'>トリガードATMバックスプレッド PUT (売1:買3)</td><td style='text-align:left'>利確</td><td><span class='pos'>+695,000円</span></td><td style='text-align:left'>3日 ｜ -1,750pt ｜ IV +1.6</td><td style='text-align:left'>価格変動 +894,877円が最大の追い風</td></tr><tr><td style='text-align:left'>2026-07-24</td><td style='text-align:left'>OTM±2000ゼロコストレシオ</td><td style='text-align:left'>利確</td><td><span class='pos'>+245,000円</span></td><td style='text-align:left'>7日 ｜ +495pt ｜ IV +2.0</td><td style='text-align:left'>時間経過 +368,418円が最大の追い風</td></tr><tr><td style='text-align:left'>2026-07-23</td><td style='text-align:left'>OTM±1000ゼロコストレシオ</td><td style='text-align:left'>利確</td><td><span class='pos'>+482,000円</span></td><td style='text-align:left'>13日 ｜ -2,555pt ｜ IV +1.5</td><td style='text-align:left'>13日の比較的長い保有期間でゼロコストレシオが+482,000円の利益を生み出した。日経が-2,555pt 低下する局面でも、モデル上は時間経過の推定寄与が約+68.9万円で最大の要因となり、価格下落（約-17.3万円）とIV低下（約-3.4万円）の負の寄与を相殺して、SQ22日前の期近局面での時間価値蓄積が利益の源となった。</td></tr><tr><td style='text-align:left'>2026-07-21</td><td style='text-align:left'>ATM ロングストラドル</td><td style='text-align:left'>利確</td><td><span class='pos'>+275,000円</span></td><td style='text-align:left'>4日 ｜ +2,245pt ｜ IV +0.4</td><td style='text-align:left'>短期保有（4日）での急速な日経上昇（+2,245pt）に対して、ロングストラドルが+275,000円の大きな利益を生み出した。モデル上、価格変動の推定寄与が約+41.2万円で支配的で、IV上昇の寄与（約+21.5万円）も加わり、時間減衰（約-35.3万円）の圧を大幅に上回った。</td></tr><tr><td style='text-align:left'>2026-07-21</td><td style='text-align:left'>トリガードATMバックスプレッド CALL (売1:買3)</td><td style='text-align:left'>利確</td><td><span class='pos'>+795,000円</span></td><td style='text-align:left'>4日 ｜ +2,245pt ｜ IV +0.4</td><td style='text-align:left'>価格変動 +1,348,080円が最大の追い風</td></tr><tr><td style='text-align:left'>2026-07-17</td><td style='text-align:left'>ATMカレンダー</td><td style='text-align:left'>損切り</td><td><span class='neg'>-620,000円</span></td><td style='text-align:left'>7日 ｜ -4,795pt ｜ IV +1.4</td><td style='text-align:left'>7日保有で-62万円の損失。期近C/P売り・期先C/P買いの構造で時間利益を狙ったが、4,795ptの下落がATM近辺で売り脚の損失を拡大させた。モデル上、価格変動-46万円、IV低下-24万円の推定寄与が、時間経過+8万円を上回った。</td></tr><tr><td style='text-align:left'>2026-07-17</td><td style='text-align:left'>ATMダイアゴナル</td><td style='text-align:left'>損切り</td><td><span class='neg'>-470,000円</span></td><td style='text-align:left'>7日 ｜ -4,795pt ｜ IV +1.4</td><td style='text-align:left'>7日保有で-47万円の損失。期近売り脚（異なるストライク）が4,795pt下落に対応できず、モデル上は価格変動による推定寄与-44万円で損失の大半を占めた。</td></tr><tr><td style='text-align:left'>2026-07-17</td><td style='text-align:left'>ATM±2000ダイアゴナル</td><td style='text-align:left'>損切り</td><td><span class='neg'>-400,000円</span></td><td style='text-align:left'>7日 ｜ -4,795pt ｜ IV +1.4</td><td style='text-align:left'>7日保有で-40万円の損失。期近売り脚（71,500 CALL売、66,500 PUT売）がOTM±2000配置でも、下落で被打撃。価格変動による推定寄与-40万円が損失を決定づけた。</td></tr><tr><td style='text-align:left'>2026-07-17</td><td style='text-align:left'>ATM ロングストラドル</td><td style='text-align:left'>利確</td><td><span class='pos'>+905,000円</span></td><td style='text-align:left'>1日 ｜ -2,855pt ｜ IV +2.8</td><td style='text-align:left'>1日保有で+91万円の利益。2,855pt下落でPUT買いが大幅利益。モデル上は価格変動+54万円、IV上昇+44万円の推定寄与が、1日の時間経過-8万円を上回った。</td></tr></tbody></table>
+  <p class="meta">トラック決済180件を集計（コンボは含みません）、明細は直近20件。損益理由は決済時に記録した ai_narrative の再掲です（simulations/state.json）。</p>
+</article>
+</main></body></html>
