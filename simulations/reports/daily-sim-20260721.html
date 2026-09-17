@@ -23,7 +23,9 @@ h1{font-size:20px;margin:0 0 4px}
 /* 期近 / 期先のATM IVは1行で出す。5枚が1列に並ぶ幅ではこのカードの列を広げ、
    2列以上の幅では2枠使う。1列の幅はそのままで収まる。 */
 .card .v.iv{font-size:18px;white-space:nowrap}
-.card .v.iv .chg{font-size:12px}
+/* 全角カッコは字形の外側に余白を持ち、閉じカッコ直後の「/」の左だけが広く見える。
+   halt で詰め、開きカッコ側は margin で元の間隔に戻す。 */
+.card .v.iv .chg{font-size:12px;font-feature-settings:"halt";margin-left:.5em;margin-right:-.15em}
 .cards{grid-auto-flow:row dense}
 @media (min-width:408px){.card.ivcard{grid-column:span 2}}
 @media (min-width:1120px){
