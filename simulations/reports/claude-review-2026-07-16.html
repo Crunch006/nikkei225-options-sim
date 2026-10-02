@@ -11,6 +11,47 @@ th,td{padding:7px;border-bottom:1px solid #273047;text-align:right}th{text-align
 p{line-height:1.75}@media(max-width:700px){.grid{grid-template-columns:1fr}}
 
 h3 span.pos{color:#50e3a4}h3 span.neg{color:#ff6b8a}
+
+.anchor{display:block;position:relative;top:-12px}
+.verdict{border-left:3px solid #6aa9ff;background:#151d33;border-radius:0 6px 6px 0;
+padding:10px 14px;margin:12px 0 18px}
+.verdict p{margin:0;font-size:15.5px;line-height:1.8}
+.axes{margin:18px 0}
+.axis-table{font-size:13.5px}
+.axis-table th,.axis-table td{text-align:left;vertical-align:top;padding:8px 6px}
+.axis-table thead th{font-size:13px}
+.axis-table td span,.axis-table th span{display:block}
+.axis-table td span{white-space:nowrap}
+.axis-table .ax{font-weight:800;color:#cfd6e6}
+.axis-table .sub{font-size:12px;color:#8b95ad;font-weight:400}
+.axis-table tr.side th{font-size:12px;color:#9aa5bd;padding-top:12px;
+border-bottom:1px solid #3a4665}
+.vd{font-size:12.5px;font-weight:700}.vd-fav{color:#50e3a4}.vd-unf{color:#ff6b8a}
+.vd-neu,.vd-unk{color:#9aa5bd}
+.axis-cap{margin:0 0 4px;font-size:12.5px;color:#8b95ad}
+@media(max-width:700px){
+.axis-table thead{display:none}
+.axis-table,.axis-table tbody,.axis-table tr,.axis-table th,.axis-table td{display:block}
+.axis-table tr{padding:8px 0;border-bottom:1px solid #273047}
+.axis-table tr.side{padding:10px 0 0;border-bottom:0}
+.axis-table th,.axis-table td,.axis-table tr.side th{border:0;padding:2px 0}
+.axis-table th span,.axis-table td span{display:inline-block;margin-right:10px}
+.axis-table td::before{content:attr(data-k);display:inline-block;min-width:4.6em;
+font-size:12px;color:#8b95ad}
+}
+.axis-notes{margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.7;color:#aab4ca}
+.axis-notes b{color:#cfd6e6}
+details.more{margin:16px 0 4px;border:1px solid #29324a;border-radius:6px;padding:0 12px}
+details.more>summary{cursor:pointer;padding:10px 0;color:#9aa5bd;font-weight:700;font-size:14px}
+details.more[open]{padding-bottom:6px}
+.dg-k{margin:16px 0 4px;font-size:13px;color:#9aa5bd}
+.digest{list-style:none;margin:0;padding:0}
+.digest li{padding:9px 0;border-bottom:1px solid #273047}
+.dg-h{display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.dg-h a{color:#cfd6e6;text-decoration:none;font-weight:700;font-size:14.5px}
+.dg-h span{white-space:nowrap;font-weight:700;font-variant-numeric:tabular-nums}
+.dg-m{margin-top:3px;font-size:12.5px;color:#8b95ad}
+
 </style></head><body><main>
 <h1>Claude 日次レビュー</h1><div class="sub">2026-07-16</div>
 
@@ -24,8 +65,13 @@ h3 span.pos{color:#50e3a4}h3 span.neg{color:#ff6b8a}
   <tr><th>ATM IV</th><td>29.6</td></tr></table></div>
 </article>
 <article class="card">
+  <h2>本日の要点</h2>
+  <ul class='digest'><li><div class='dg-h'><a href='#rv-s1'>32. OTM±3000 ストラングル</a><span class='neg'>-260,000円</span></div><div class='dg-m'>総合判定 — ・ 3年分布 —</div></li><li><div class='dg-h'><a href='#rv-s2'>33. OTM±1000 ストラングル</a><span class='neg'>-315,000円</span></div><div class='dg-m'>総合判定 — ・ 3年分布 —</div></li><li><div class='dg-h'><a href='#rv-s3'>34. ATM ロングストラドル</a><span class='neg'>-320,000円</span></div><div class='dg-m'>総合判定 — ・ 3年分布 —</div></li></ul>
+  <p class="meta">総合判定は有利・不利の軸の数、3年分布は本日の損益の3年リプレイ分布での位置です。戦略名から個別レビューへ移動します。</p>
+</article>
+<article class="card">
   <h2>個別戦略レビュー</h2>
-  <h3>32. OTM±3000 ストラングル（ロングボラ型）<span class='neg'> -260,000円</span></h3><p>本日損切りで-260,000円を確定。この決済の要因分解では、時間経過 -185,458円が最大の逆風です。価格変動 +6,520円の追い風では補えず、損失になりました。IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC70,500 29.2%→28.6%（-0.6pt）・買いP64,500 32.8%→31.5%（-1.3pt）。</p><p>累計は-114,000円の損失です。14回中5勝（直近5件 ○××××）、傾向は改善、PF 0.96、最大DD -2,139,000円です。</p><p>このタイプは大きな価格変動またはIV上昇を想定した設計です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-74,556円で、想定した条件は満たされず逆風でした。</p><p>本番の診断（参考）: 直近5件の合計損益は、その前の5件より改善しています。</p><p class='meta'>※ n=14（20回未満のため参考値扱い）</p><h3>33. OTM±1000 ストラングル（ロングボラ型）<span class='neg'> -315,000円</span></h3><p>本日損切りで-315,000円を確定。この決済の要因分解では、時間経過 -204,685円が最大の逆風です。IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC68,500 30.1%→29.1%（-1.0pt）・買いP66,500 31.2%→30.1%（-1.1pt）。</p><p>累計は-225,000円の損失です。14回中5勝（直近5件 ○××××）、傾向は改善、PF 0.94、最大DD -2,525,000円です。</p><p>このタイプは大きな価格変動またはIV上昇を想定した設計です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-110,340円で、想定した条件は満たされず逆風でした。</p><p>本番の診断（参考）: 直近5件の合計損益は、その前の5件より改善しています。</p><p class='meta'>※ n=14（20回未満のため参考値扱い）</p><h3>34. ATM ロングストラドル（ロングボラ型）<span class='neg'> -320,000円</span></h3><p>本日損切りで-320,000円を確定。この決済の要因分解では、時間経過 -207,105円が最大の逆風です。IV実測（建玉時→決済時、固定ストライクを価格から逆算）: 買いC67,500 30.6%→29.6%（-1.1pt）・買いP67,500 30.6%→29.6%（-1.1pt）。</p><p>累計は+1,486,000円の利益です。20回中9勝（直近5件 ○××××）、傾向は改善、PF 1.38、最大DD -1,649,000円です。</p><p>このタイプは大きな価格変動またはIV上昇を想定した設計です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-112,918円で、想定した条件は満たされず逆風でした。</p><p>本番の診断（参考）: 直近5件の合計損益は、その前の5件より改善しています。</p>
+  <a class='anchor' id='rv-s1'></a><h3>32. OTM±3000 ストラングル（ロングボラ型）<span class='neg'> -260,000円</span></h3><p>本日損切りで-260,000円を確定。この決済の要因分解では、時間経過 -185,458円が最大の逆風です。価格変動 +6,520円の追い風では補えず、損失になりました。</p><div class='ivrow'><span class='ivrow-k'>IV実測</span><div class='ivchips'><span class='ivchip'>買いC70,500 29.2%→28.6%（-0.6pt）</span><span class='ivchip'>買いP64,500 32.8%→31.5%（-1.3pt）</span></div><span class='ivnote'>建玉時→決済時、固定ストライクを価格から逆算</span></div><p>累計は-114,000円の損失です。14回中5勝（直近5件 ○××××）、傾向は改善、PF 0.96、最大DD -2,139,000円です。</p><p>このタイプは大きな価格変動またはIV上昇を想定した設計です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-74,556円で、想定した条件は満たされず逆風でした。</p><details class='more'><summary>補足（本番の診断・注記）</summary><div class='blk'><span class='blk-k'>本番の診断（参考）</span><p>直近5件の合計損益は、その前の5件より改善しています。</p></div><p class='meta'>※ n=14（20回未満のため参考値扱い）</p></details><a class='anchor' id='rv-s2'></a><h3>33. OTM±1000 ストラングル（ロングボラ型）<span class='neg'> -315,000円</span></h3><p>本日損切りで-315,000円を確定。この決済の要因分解では、時間経過 -204,685円が最大の逆風です。</p><div class='ivrow'><span class='ivrow-k'>IV実測</span><div class='ivchips'><span class='ivchip'>買いC68,500 30.1%→29.1%（-1.0pt）</span><span class='ivchip'>買いP66,500 31.2%→30.1%（-1.1pt）</span></div><span class='ivnote'>建玉時→決済時、固定ストライクを価格から逆算</span></div><p>累計は-225,000円の損失です。14回中5勝（直近5件 ○××××）、傾向は改善、PF 0.94、最大DD -2,525,000円です。</p><p>このタイプは大きな価格変動またはIV上昇を想定した設計です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-110,340円で、想定した条件は満たされず逆風でした。</p><details class='more'><summary>補足（本番の診断・注記）</summary><div class='blk'><span class='blk-k'>本番の診断（参考）</span><p>直近5件の合計損益は、その前の5件より改善しています。</p></div><p class='meta'>※ n=14（20回未満のため参考値扱い）</p></details><a class='anchor' id='rv-s3'></a><h3>34. ATM ロングストラドル（ロングボラ型）<span class='neg'> -320,000円</span></h3><p>本日損切りで-320,000円を確定。この決済の要因分解では、時間経過 -207,105円が最大の逆風です。</p><div class='ivrow'><span class='ivrow-k'>IV実測</span><div class='ivchips'><span class='ivchip'>買いC67,500 30.6%→29.6%（-1.1pt）</span><span class='ivchip'>買いP67,500 30.6%→29.6%（-1.1pt）</span></div><span class='ivnote'>建玉時→決済時、固定ストライクを価格から逆算</span></div><p>累計は+1,486,000円の利益です。20回中9勝（直近5件 ○××××）、傾向は改善、PF 1.38、最大DD -1,649,000円です。</p><p>このタイプは大きな価格変動またはIV上昇を想定した設計です。本日の決済の要因分解（保有レッグの固定ストライク基準）では、価格変動+IV変化の合計が-112,918円で、想定した条件は満たされず逆風でした。</p><details class='more'><summary>補足（本番の診断）</summary><div class='blk'><span class='blk-k'>本番の診断（参考）</span><p>直近5件の合計損益は、その前の5件より改善しています。</p></div></details>
   <p class="meta">当日決済1件ごとの詳細な数値分解はCodex版レポートを参照。</p>
 </article>
 <article class="card">
